@@ -1,0 +1,14 @@
+[Unit]
+Description=Gunicorn instance to serve a flask app
+After=network.target
+
+[Service]
+User=<%= ENV['USER'] %>
+Group=<%= ENV['USER'] %>
+WorkingDirectory=/opt/app
+Environment="PATH=/opt/app/flaskenv/bin"
+ExecStart=/opt/app/flaskenv/bin/gunicorn --workers 3 --bind localhost:5000 -m 007 wsgi:app
+ExecStop=/bin/kill -s TERM $MAINPID
+
+[Install]
+WantedBy=multi-user.target
