@@ -4,6 +4,9 @@
 #
 # Copyright:: 2018, The Authors, All Rights Reserved.
 
+# Get yum epel-library
+package 'epel-release'
+
 # Install OS dependencies
 python_runtime '2'
 package 'git'
@@ -17,7 +20,7 @@ end
 # Install dependencies into virtualenv
 python_virtualenv '/opt/app/flaskenv'
 pip_requirements "/opt/app/requirements.txt" do
-  virtualenv "/opt/app/flaskenv"
+  virtualenv '/opt/app/flaskenv'
 end
 
 # Start Gunicorn service
