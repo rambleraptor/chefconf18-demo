@@ -12,9 +12,9 @@ metadata() {
 #################################################
 declare -r chef_server="chef-server.c.graphite-demo-chefconf18-test.internal" # Chef server url
 declare -r org_name="google" # Chef server org name
-declare -r chef_server_crt="gs://chefconf18-test-bucket/server" # GCS bucket location for server cert.
-declare -r validator="gs://chefconf18-test-bucket/validator" # GCS bucket location for validator cert
-declare -r start_run_list="recipe[onprem~default]" # Runlist name
+declare -r chef_server_crt="/opt/bootstrap/server" # GCS bucket location for server cert.
+declare -r validator="/opt/bootstrap/validator" # GCS bucket location for validator cert
+declare -r start_run_list="recipe[onprem::docker]" # Runlist name
 declare -r local_validator='/etc/chef/validation.pem'
 declare -r startup_json='/etc/chef/startup.json'
 ##################################################
@@ -45,20 +45,19 @@ startup json    : $startup_json
 ------------------------------------------------------------------------
 EOF
 
-declare -r start_time=$(date +%s)
 logger -t bootstrapper 'Starting bootstrap'
 
 if [[ -e '/usr/bin/chef-client' ]]; then
   echo '----- Chef already installed. Skipping installation. -----'
 else
   echo '----- Installing Chef client -----'
-  curl -L https://www.opscode.com/chef/install.sh | sudo bash
+  curl -L https://www.opscode.com/chef/install.sh | bash
 fi
 
 mkdir -p /etc/chef
 
 echo '----- Copying validator key -----'
-gsutil cp "${validator}" "${local_validator}"
+cp "${validator}" "${local_validator}"
 
 cat >/etc/chef/client.rb <<EOF
 chef_server_url '${chef_server_url}'
@@ -67,7 +66,7 @@ EOF
 
 echo '----- Setting up security -----'
 mkdir -p /etc/chef/trusted_certs
-gsutil cp "${chef_server_crt}" "/etc/chef/trusted_certs/server.crt"
+cp "${chef_server_crt}" "/etc/chef/trusted_certs/server.crt"
 
 echo '----- Setting first run -----'
 cat >"${startup_json}" <<EOF
@@ -83,3 +82,7 @@ echo 'Deleting validator key'
 rm -f "${local_validator}"
 echo 'Deleting startup role'
 rm -f "${startup_json}"
+
+# Run app
+FLASK_APP=/opt/app/app.py flask run --host=0.0.0.0
+
