@@ -1,0 +1,45 @@
+{
+  "name": "infra",
+  "description": "Installs/Configures infra",
+  "long_description": "Installs/Configures infra",
+  "maintainer": "The Authors",
+  "maintainer_email": "you@example.com",
+  "license": "All Rights Reserved",
+  "platforms": {
+  },
+  "dependencies": {
+    "google-gcontainer": ">= 0.0.0",
+    "google-gdns": ">= 0.0.0"
+  },
+  "recommendations": {
+  },
+  "suggestions": {
+  },
+  "conflicting": {
+  },
+  "providing": {
+  },
+  "replacing": {
+  },
+  "attributes": {
+  },
+  "groupings": {
+  },
+  "recipes": {
+  },
+  "version": "0.1.0",
+  "source_url": "",
+  "issues_url": "",
+  "privacy": false,
+  "chef_versions": [
+    [
+      ">= 12.14"
+    ]
+  ],
+  "ohai_versions": [
+
+  ],
+  "gems": [
+
+  ]
+}
