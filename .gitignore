@@ -20,3 +20,8 @@ bin/*
 Berksfile.lock
 .zero-knife.rb
 Policyfile.lock.json
+
+# Chef certs
+image/validator
+image/validation
+image/server
