@@ -84,5 +84,4 @@ echo 'Deleting startup role'
 rm -f "${startup_json}"
 
 # Run app
-FLASK_APP=/opt/app/app.py flask run --host=0.0.0.0
 
