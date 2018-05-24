@@ -17,6 +17,14 @@ git "/opt/app" do
   branch "background"
 end
 
+bash 'fetch background branch' do
+  code 'cd /opt/app && git fetch origin background'
+end
+
+bash 'checkout background branch' do
+  code 'cd /opt/app && git checkout origin/background'
+end
+
 # Install Pip manually because poise-python doesn't seem to
 bash 'get pip install script' do
   code 'curl https://bootstrap.pypa.io/get-pip.py -o /opt/bootstrap/get-pip.py'

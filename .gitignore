@@ -25,3 +25,6 @@ Policyfile.lock.json
 image/validator
 image/validation
 image/server
+image2/validator
+image2/validation
+image2/server

@@ -14,7 +14,7 @@ declare -r chef_server="chef-server.c.graphite-demo-chefconf18-test.internal" # 
 declare -r org_name="google" # Chef server org name
 declare -r chef_server_crt="/opt/bootstrap/server" # GCS bucket location for server cert.
 declare -r validator="/opt/bootstrap/validator" # GCS bucket location for validator cert
-declare -r start_run_list="recipe[onprem::docker]" # Runlist name
+declare -r start_run_list="recipe[onprem::docker2]" # Runlist name
 declare -r local_validator='/etc/chef/validation.pem'
 declare -r startup_json='/etc/chef/startup.json'
 ##################################################
